@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="96e01b3efc5845b18de739d65d510ea1" Name="Diagram1">
+        <EntityTypeShape EntityType="Database.hydlstation" Width="1.5" PointX="3" PointY="1.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="Database.rain" Width="1.5" PointX="0.625" PointY="0.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="Database.SerialPort" Width="1.5" PointX="5.625" PointY="1.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="Database.soildata" Width="1.5" PointX="5.625" PointY="4.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="Database.soilstation" Width="1.5" PointX="3" PointY="4.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="Database.ST_ZQ_B" Width="1.5" PointX="5.625" PointY="2.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="Database.SubCenter" Width="1.5" PointX="3" PointY="2.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="Database.User" Width="1.5" PointX="5.625" PointY="0.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="Database.voltage" Width="1.5" PointX="0.625" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Database.WarningInfo" Width="1.5" PointX="5.625" PointY="3.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="Database.water" Width="1.5" PointX="0.625" PointY="1.625" IsExpanded="false" />
+        <AssociationConnector Association="Database.FK_hydlstation_hydlstation" ManuallyRouted="false" />
+        <AssociationConnector Association="Database.FK_rain_hydlstation" ManuallyRouted="false" />
+        <AssociationConnector Association="Database.FK_STATION_REFERENCE_SUBCENTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Database.FK_voltage_hydlstation" ManuallyRouted="false" />
+        <AssociationConnector Association="Database.FK_water_hydlstation" ManuallyRouted="false" />
+        <AssociationConnector Association="Database.FK_SOILDATA_REFERENCE_STATION" ManuallyRouted="false" />
+        <AssociationConnector Association="Database.FK_soilstation_SubCenter" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

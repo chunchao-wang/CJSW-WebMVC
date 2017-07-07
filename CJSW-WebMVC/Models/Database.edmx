@@ -1,0 +1,911 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Database.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="hydlstation">
+          <Key>
+            <PropertyRef Name="StationID" />
+          </Key>
+          <Property Name="StationID" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="SubCenterID" Type="int" Nullable="false" />
+          <Property Name="CName" Type="varchar" MaxLength="50" />
+          <Property Name="CType" Type="char" MaxLength="2" />
+          <Property Name="WBase" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="WMax" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="WMin" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="WChange" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="RAccuracy" Type="numeric" Precision="2" Scale="1" />
+          <Property Name="RChange" Type="numeric" Precision="18" Scale="1" />
+          <Property Name="Gsm" Type="varchar" MaxLength="20" />
+          <Property Name="Gprs" Type="varchar" MaxLength="11" />
+          <Property Name="BDSatellite" Type="varchar" MaxLength="8" />
+          <Property Name="BDmember" Type="varchar" MaxLength="3" />
+          <Property Name="VoltageMin" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="maintran" Type="varchar" MaxLength="20" />
+          <Property Name="subtran" Type="varchar" MaxLength="20" />
+          <Property Name="dataprotocol" Type="varchar" MaxLength="20" />
+          <Property Name="watersensor" Type="char" MaxLength="2" />
+          <Property Name="rainsensor" Type="char" MaxLength="2" />
+          <Property Name="reportinterval" Type="varchar" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="rain">
+          <Key>
+            <PropertyRef Name="stationid" />
+            <PropertyRef Name="datatime" />
+          </Key>
+          <Property Name="stationid" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="datatime" Type="datetime" Nullable="false" StoreGeneratedPattern="None" />
+          <Property Name="periodrain" Type="numeric" Precision="18" Scale="1" />
+          <Property Name="differencerain" Type="numeric" Precision="18" Scale="1" />
+          <Property Name="totalrain" Type="numeric" Precision="18" Scale="1" />
+          <Property Name="dayrain" Type="numeric" Precision="18" Scale="1" />
+          <Property Name="transtype" Type="char" MaxLength="2" />
+          <Property Name="messagetype" Type="char" MaxLength="1" />
+          <Property Name="recvdatatime" Type="datetime" />
+          <Property Name="state" Type="int" />
+        </EntityType>
+        <EntityType Name="SerialPort">
+          <Key>
+            <PropertyRef Name="PortNumber" />
+          </Key>
+          <Property Name="PortNumber" Type="int" Nullable="false" StoreGeneratedPattern="None" />
+          <Property Name="TransType" Type="char" MaxLength="2" />
+          <Property Name="Baudrate" Type="int" />
+          <Property Name="Databit" Type="int" />
+          <Property Name="Stopbit" Type="int" />
+          <Property Name="Parity" Type="char" MaxLength="1" />
+          <Property Name="Stream" Type="int" />
+          <Property Name="Break" Type="bit" />
+          <Property Name="Open" Type="bit" />
+          <Property Name="dataprotocol" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="soildata">
+          <Key>
+            <PropertyRef Name="StationID" />
+            <PropertyRef Name="DataTime" />
+          </Key>
+          <Property Name="StationID" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="DataTime" Type="datetime" Nullable="false" />
+          <Property Name="Voltage" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Voltage10" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Moisture10" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Voltage20" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Moisture20" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Voltage30" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Moistrue30" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Voltage40" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Moistrue40" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Voltage60" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Moistrue60" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="TransType" Type="char" MaxLength="2" />
+          <Property Name="MessageType" Type="char" MaxLength="1" />
+          <Property Name="recvdatatime" Type="datetime" />
+          <Property Name="state" Type="int" />
+        </EntityType>
+        <EntityType Name="soilstation">
+          <Key>
+            <PropertyRef Name="stationid" />
+          </Key>
+          <Property Name="stationid" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="subcenterid" Type="int" Nullable="false" />
+          <Property Name="cname" Type="varchar" MaxLength="50" />
+          <Property Name="ctype" Type="char" MaxLength="2" />
+          <Property Name="A10" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="B10" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="C10" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="D10" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="M10" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="N10" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="A20" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="B20" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="C20" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="D20" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="M20" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="N20" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="A30" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="B30" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="C30" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="D30" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="M30" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="N30" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="A40" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="B40" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="C40" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="D40" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="M40" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="N40" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="A60" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="B60" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="C60" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="D60" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="M60" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="N60" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="voltagemin" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="gsm" Type="varchar" MaxLength="20" />
+          <Property Name="gprs" Type="varchar" MaxLength="11" />
+          <Property Name="bdsatellite" Type="varchar" MaxLength="8" />
+          <Property Name="bdmember" Type="varchar" MaxLength="3" />
+          <Property Name="maintran" Type="varchar" MaxLength="20" />
+          <Property Name="subtran" Type="varchar" MaxLength="20" />
+          <Property Name="dataprotocol" Type="varchar" MaxLength="20" />
+          <Property Name="reportinterval" Type="varchar" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="ST_ZQ_B">
+          <Key>
+            <PropertyRef Name="stationid" />
+            <PropertyRef Name="BGTM" />
+            <PropertyRef Name="PTNO" />
+          </Key>
+          <Property Name="stationid" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="BGTM" Type="datetime" Nullable="false" />
+          <Property Name="PTNO" Type="int" Nullable="false" />
+          <Property Name="ZR" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Q1" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="Q2" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="Q3" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="Q4" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="Q5" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="Q6" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="currQ" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubCenter">
+          <Key>
+            <PropertyRef Name="SubCenterID" />
+          </Key>
+          <Property Name="SubCenterID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubCenterName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Administrator" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="voltage">
+          <Key>
+            <PropertyRef Name="stationid" />
+            <PropertyRef Name="datatime" />
+          </Key>
+          <Property Name="stationid" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="datatime" Type="datetime" Nullable="false" StoreGeneratedPattern="None" />
+          <Property Name="data" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="transtype" Type="char" MaxLength="2" />
+          <Property Name="messagetype" Type="char" MaxLength="1" />
+          <Property Name="recvdatatime" Type="datetime" />
+          <Property Name="state" Type="int" />
+        </EntityType>
+        <EntityType Name="WarningInfo">
+          <Key>
+            <PropertyRef Name="InfoID" />
+          </Key>
+          <Property Name="InfoID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StationID" Type="char" MaxLength="4" />
+          <Property Name="DataTime" Type="datetime" />
+          <Property Name="InfoDetail" Type="varchar" MaxLength="400" />
+          <Property Name="ErroCode" Type="char" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="water">
+          <Key>
+            <PropertyRef Name="stationid" />
+            <PropertyRef Name="datatime" />
+          </Key>
+          <Property Name="stationid" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="datatime" Type="datetime" Nullable="false" />
+          <Property Name="waterstage" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="waterflow" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="transtype" Type="char" MaxLength="2" />
+          <Property Name="messagetype" Type="char" MaxLength="1" />
+          <Property Name="recvdatatime" Type="datetime" />
+          <Property Name="state" Type="int" />
+        </EntityType>
+        <Association Name="FK_hydlstation_hydlstation">
+          <End Role="hydlstation" Type="Self.hydlstation" Multiplicity="1" />
+          <End Role="hydlstation1" Type="Self.hydlstation" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="hydlstation">
+              <PropertyRef Name="StationID" />
+            </Principal>
+            <Dependent Role="hydlstation1">
+              <PropertyRef Name="StationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rain_hydlstation">
+          <End Role="hydlstation" Type="Self.hydlstation" Multiplicity="1" />
+          <End Role="rain" Type="Self.rain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hydlstation">
+              <PropertyRef Name="StationID" />
+            </Principal>
+            <Dependent Role="rain">
+              <PropertyRef Name="stationid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOILDATA_REFERENCE_STATION">
+          <End Role="soilstation" Type="Self.soilstation" Multiplicity="1" />
+          <End Role="soildata" Type="Self.soildata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="soilstation">
+              <PropertyRef Name="stationid" />
+            </Principal>
+            <Dependent Role="soildata">
+              <PropertyRef Name="StationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_soilstation_SubCenter">
+          <End Role="SubCenter" Type="Self.SubCenter" Multiplicity="1" />
+          <End Role="soilstation" Type="Self.soilstation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCenter">
+              <PropertyRef Name="SubCenterID" />
+            </Principal>
+            <Dependent Role="soilstation">
+              <PropertyRef Name="subcenterid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STATION_REFERENCE_SUBCENTE">
+          <End Role="SubCenter" Type="Self.SubCenter" Multiplicity="1" />
+          <End Role="hydlstation" Type="Self.hydlstation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCenter">
+              <PropertyRef Name="SubCenterID" />
+            </Principal>
+            <Dependent Role="hydlstation">
+              <PropertyRef Name="SubCenterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_voltage_hydlstation">
+          <End Role="hydlstation" Type="Self.hydlstation" Multiplicity="1" />
+          <End Role="voltage" Type="Self.voltage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hydlstation">
+              <PropertyRef Name="StationID" />
+            </Principal>
+            <Dependent Role="voltage">
+              <PropertyRef Name="stationid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_water_hydlstation">
+          <End Role="hydlstation" Type="Self.hydlstation" Multiplicity="1" />
+          <End Role="water" Type="Self.water" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hydlstation">
+              <PropertyRef Name="StationID" />
+            </Principal>
+            <Dependent Role="water">
+              <PropertyRef Name="stationid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseStoreContainer">
+          <EntitySet Name="hydlstation" EntityType="Self.hydlstation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rain" EntityType="Self.rain" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SerialPort" EntityType="Self.SerialPort" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="soildata" EntityType="Self.soildata" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="soilstation" EntityType="Self.soilstation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ST_ZQ_B" EntityType="Self.ST_ZQ_B" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubCenter" EntityType="Self.SubCenter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="voltage" EntityType="Self.voltage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WarningInfo" EntityType="Self.WarningInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="water" EntityType="Self.water" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_hydlstation_hydlstation" Association="Self.FK_hydlstation_hydlstation">
+            <End Role="hydlstation" EntitySet="hydlstation" />
+            <End Role="hydlstation1" EntitySet="hydlstation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rain_hydlstation" Association="Self.FK_rain_hydlstation">
+            <End Role="hydlstation" EntitySet="hydlstation" />
+            <End Role="rain" EntitySet="rain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOILDATA_REFERENCE_STATION" Association="Self.FK_SOILDATA_REFERENCE_STATION">
+            <End Role="soilstation" EntitySet="soilstation" />
+            <End Role="soildata" EntitySet="soildata" />
+          </AssociationSet>
+          <AssociationSet Name="FK_soilstation_SubCenter" Association="Self.FK_soilstation_SubCenter">
+            <End Role="SubCenter" EntitySet="SubCenter" />
+            <End Role="soilstation" EntitySet="soilstation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STATION_REFERENCE_SUBCENTE" Association="Self.FK_STATION_REFERENCE_SUBCENTE">
+            <End Role="SubCenter" EntitySet="SubCenter" />
+            <End Role="hydlstation" EntitySet="hydlstation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_voltage_hydlstation" Association="Self.FK_voltage_hydlstation">
+            <End Role="hydlstation" EntitySet="hydlstation" />
+            <End Role="voltage" EntitySet="voltage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_water_hydlstation" Association="Self.FK_water_hydlstation">
+            <End Role="hydlstation" EntitySet="hydlstation" />
+            <End Role="water" EntitySet="water" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Database" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="hydlstation">
+          <Key>
+            <PropertyRef Name="StationID" />
+          </Key>
+          <Property Name="StationID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="SubCenterID" Type="Int32" Nullable="false" />
+          <Property Name="CName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CType" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="WBase" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="WMax" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="WMin" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="WChange" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="RAccuracy" Type="Decimal" Precision="2" Scale="1" />
+          <Property Name="RChange" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="Gsm" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Gprs" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="BDSatellite" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="BDmember" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="VoltageMin" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="maintran" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="subtran" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="dataprotocol" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="watersensor" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="rainsensor" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="reportinterval" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="hydlstation1" Relationship="Self.FK_hydlstation_hydlstation" FromRole="hydlstation" ToRole="hydlstation1" />
+          <NavigationProperty Name="hydlstation2" Relationship="Self.FK_hydlstation_hydlstation" FromRole="hydlstation1" ToRole="hydlstation" />
+          <NavigationProperty Name="rain" Relationship="Self.FK_rain_hydlstation" FromRole="hydlstation" ToRole="rain" />
+          <NavigationProperty Name="SubCenter" Relationship="Self.FK_STATION_REFERENCE_SUBCENTE" FromRole="hydlstation" ToRole="SubCenter" />
+          <NavigationProperty Name="voltage" Relationship="Self.FK_voltage_hydlstation" FromRole="hydlstation" ToRole="voltage" />
+          <NavigationProperty Name="water" Relationship="Self.FK_water_hydlstation" FromRole="hydlstation" ToRole="water" />
+        </EntityType>
+        <EntityType Name="rain">
+          <Key>
+            <PropertyRef Name="stationid" />
+            <PropertyRef Name="datatime" />
+          </Key>
+          <Property Name="stationid" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="datatime" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="None" />
+          <Property Name="periodrain" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="differencerain" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="totalrain" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="dayrain" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="transtype" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="messagetype" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="recvdatatime" Type="DateTime" Precision="3" />
+          <Property Name="state" Type="Int32" />
+          <NavigationProperty Name="hydlstation" Relationship="Self.FK_rain_hydlstation" FromRole="rain" ToRole="hydlstation" />
+        </EntityType>
+        <EntityType Name="SerialPort">
+          <Key>
+            <PropertyRef Name="PortNumber" />
+          </Key>
+          <Property Name="PortNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="TransType" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="Baudrate" Type="Int32" />
+          <Property Name="Databit" Type="Int32" />
+          <Property Name="Stopbit" Type="Int32" />
+          <Property Name="Parity" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Stream" Type="Int32" />
+          <Property Name="Break" Type="Boolean" />
+          <Property Name="Open" Type="Boolean" />
+          <Property Name="dataprotocol" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="soildata">
+          <Key>
+            <PropertyRef Name="StationID" />
+            <PropertyRef Name="DataTime" />
+          </Key>
+          <Property Name="StationID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="DataTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Voltage" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Voltage10" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Moisture10" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Voltage20" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Moisture20" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Voltage30" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Moistrue30" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Voltage40" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Moistrue40" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Voltage60" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Moistrue60" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TransType" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="MessageType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="recvdatatime" Type="DateTime" Precision="3" />
+          <Property Name="state" Type="Int32" />
+          <NavigationProperty Name="soilstation" Relationship="Self.FK_SOILDATA_REFERENCE_STATION" FromRole="soildata" ToRole="soilstation" />
+        </EntityType>
+        <EntityType Name="soilstation">
+          <Key>
+            <PropertyRef Name="stationid" />
+          </Key>
+          <Property Name="stationid" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="subcenterid" Type="Int32" Nullable="false" />
+          <Property Name="cname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ctype" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="A10" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="B10" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="C10" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="D10" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="M10" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="N10" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="A20" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="B20" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="C20" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="D20" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="M20" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="N20" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="A30" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="B30" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="C30" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="D30" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="M30" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="N30" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="A40" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="B40" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="C40" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="D40" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="M40" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="N40" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="A60" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="B60" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="C60" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="D60" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="M60" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="N60" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="voltagemin" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="gsm" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="gprs" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="bdsatellite" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="bdmember" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="maintran" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="subtran" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="dataprotocol" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="reportinterval" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="soildata" Relationship="Self.FK_SOILDATA_REFERENCE_STATION" FromRole="soilstation" ToRole="soildata" />
+          <NavigationProperty Name="SubCenter" Relationship="Self.FK_soilstation_SubCenter" FromRole="soilstation" ToRole="SubCenter" />
+        </EntityType>
+        <EntityType Name="ST_ZQ_B">
+          <Key>
+            <PropertyRef Name="stationid" />
+            <PropertyRef Name="BGTM" />
+            <PropertyRef Name="PTNO" />
+          </Key>
+          <Property Name="stationid" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="BGTM" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PTNO" Type="Int32" Nullable="false" />
+          <Property Name="ZR" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Q1" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="Q2" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="Q3" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="Q4" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="Q5" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="Q6" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="currQ" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubCenter">
+          <Key>
+            <PropertyRef Name="SubCenterID" />
+          </Key>
+          <Property Name="SubCenterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubCenterName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="hydlstation" Relationship="Self.FK_STATION_REFERENCE_SUBCENTE" FromRole="SubCenter" ToRole="hydlstation" />
+          <NavigationProperty Name="soilstation" Relationship="Self.FK_soilstation_SubCenter" FromRole="SubCenter" ToRole="soilstation" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Administrator" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="voltage">
+          <Key>
+            <PropertyRef Name="stationid" />
+            <PropertyRef Name="datatime" />
+          </Key>
+          <Property Name="stationid" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="datatime" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="None" />
+          <Property Name="data" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="transtype" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="messagetype" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="recvdatatime" Type="DateTime" Precision="3" />
+          <Property Name="state" Type="Int32" />
+          <NavigationProperty Name="hydlstation" Relationship="Self.FK_voltage_hydlstation" FromRole="voltage" ToRole="hydlstation" />
+        </EntityType>
+        <EntityType Name="WarningInfo">
+          <Key>
+            <PropertyRef Name="InfoID" />
+          </Key>
+          <Property Name="InfoID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StationID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="DataTime" Type="DateTime" Precision="3" />
+          <Property Name="InfoDetail" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="ErroCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="water">
+          <Key>
+            <PropertyRef Name="stationid" />
+            <PropertyRef Name="datatime" />
+          </Key>
+          <Property Name="stationid" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="datatime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="waterstage" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="waterflow" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="transtype" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="messagetype" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="recvdatatime" Type="DateTime" Precision="3" />
+          <Property Name="state" Type="Int32" />
+          <NavigationProperty Name="hydlstation" Relationship="Self.FK_water_hydlstation" FromRole="water" ToRole="hydlstation" />
+        </EntityType>
+        <Association Name="FK_hydlstation_hydlstation">
+          <End Role="hydlstation" Type="Self.hydlstation" Multiplicity="1" />
+          <End Role="hydlstation1" Type="Self.hydlstation" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="hydlstation">
+              <PropertyRef Name="StationID" />
+            </Principal>
+            <Dependent Role="hydlstation1">
+              <PropertyRef Name="StationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rain_hydlstation">
+          <End Role="hydlstation" Type="Self.hydlstation" Multiplicity="1" />
+          <End Role="rain" Type="Self.rain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hydlstation">
+              <PropertyRef Name="StationID" />
+            </Principal>
+            <Dependent Role="rain">
+              <PropertyRef Name="stationid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STATION_REFERENCE_SUBCENTE">
+          <End Role="SubCenter" Type="Self.SubCenter" Multiplicity="1" />
+          <End Role="hydlstation" Type="Self.hydlstation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCenter">
+              <PropertyRef Name="SubCenterID" />
+            </Principal>
+            <Dependent Role="hydlstation">
+              <PropertyRef Name="SubCenterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_voltage_hydlstation">
+          <End Role="hydlstation" Type="Self.hydlstation" Multiplicity="1" />
+          <End Role="voltage" Type="Self.voltage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hydlstation">
+              <PropertyRef Name="StationID" />
+            </Principal>
+            <Dependent Role="voltage">
+              <PropertyRef Name="stationid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_water_hydlstation">
+          <End Role="hydlstation" Type="Self.hydlstation" Multiplicity="1" />
+          <End Role="water" Type="Self.water" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hydlstation">
+              <PropertyRef Name="StationID" />
+            </Principal>
+            <Dependent Role="water">
+              <PropertyRef Name="stationid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOILDATA_REFERENCE_STATION">
+          <End Role="soilstation" Type="Self.soilstation" Multiplicity="1" />
+          <End Role="soildata" Type="Self.soildata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="soilstation">
+              <PropertyRef Name="stationid" />
+            </Principal>
+            <Dependent Role="soildata">
+              <PropertyRef Name="StationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_soilstation_SubCenter">
+          <End Role="SubCenter" Type="Self.SubCenter" Multiplicity="1" />
+          <End Role="soilstation" Type="Self.soilstation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCenter">
+              <PropertyRef Name="SubCenterID" />
+            </Principal>
+            <Dependent Role="soilstation">
+              <PropertyRef Name="subcenterid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="hydlstation" EntityType="Self.hydlstation" />
+          <EntitySet Name="rain" EntityType="Self.rain" />
+          <EntitySet Name="SerialPort" EntityType="Self.SerialPort" />
+          <EntitySet Name="soildata" EntityType="Self.soildata" />
+          <EntitySet Name="soilstation" EntityType="Self.soilstation" />
+          <EntitySet Name="ST_ZQ_B" EntityType="Self.ST_ZQ_B" />
+          <EntitySet Name="SubCenter" EntityType="Self.SubCenter" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="voltage" EntityType="Self.voltage" />
+          <EntitySet Name="WarningInfo" EntityType="Self.WarningInfo" />
+          <EntitySet Name="water" EntityType="Self.water" />
+          <AssociationSet Name="FK_hydlstation_hydlstation" Association="Self.FK_hydlstation_hydlstation">
+            <End Role="hydlstation" EntitySet="hydlstation" />
+            <End Role="hydlstation1" EntitySet="hydlstation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rain_hydlstation" Association="Self.FK_rain_hydlstation">
+            <End Role="hydlstation" EntitySet="hydlstation" />
+            <End Role="rain" EntitySet="rain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STATION_REFERENCE_SUBCENTE" Association="Self.FK_STATION_REFERENCE_SUBCENTE">
+            <End Role="SubCenter" EntitySet="SubCenter" />
+            <End Role="hydlstation" EntitySet="hydlstation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_voltage_hydlstation" Association="Self.FK_voltage_hydlstation">
+            <End Role="hydlstation" EntitySet="hydlstation" />
+            <End Role="voltage" EntitySet="voltage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_water_hydlstation" Association="Self.FK_water_hydlstation">
+            <End Role="hydlstation" EntitySet="hydlstation" />
+            <End Role="water" EntitySet="water" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOILDATA_REFERENCE_STATION" Association="Self.FK_SOILDATA_REFERENCE_STATION">
+            <End Role="soilstation" EntitySet="soilstation" />
+            <End Role="soildata" EntitySet="soildata" />
+          </AssociationSet>
+          <AssociationSet Name="FK_soilstation_SubCenter" Association="Self.FK_soilstation_SubCenter">
+            <End Role="SubCenter" EntitySet="SubCenter" />
+            <End Role="soilstation" EntitySet="soilstation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DatabaseStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="hydlstation">
+            <EntityTypeMapping TypeName="Database.hydlstation">
+              <MappingFragment StoreEntitySet="hydlstation">
+                <ScalarProperty Name="StationID" ColumnName="StationID" />
+                <ScalarProperty Name="SubCenterID" ColumnName="SubCenterID" />
+                <ScalarProperty Name="CName" ColumnName="CName" />
+                <ScalarProperty Name="CType" ColumnName="CType" />
+                <ScalarProperty Name="WBase" ColumnName="WBase" />
+                <ScalarProperty Name="WMax" ColumnName="WMax" />
+                <ScalarProperty Name="WMin" ColumnName="WMin" />
+                <ScalarProperty Name="WChange" ColumnName="WChange" />
+                <ScalarProperty Name="RAccuracy" ColumnName="RAccuracy" />
+                <ScalarProperty Name="RChange" ColumnName="RChange" />
+                <ScalarProperty Name="Gsm" ColumnName="Gsm" />
+                <ScalarProperty Name="Gprs" ColumnName="Gprs" />
+                <ScalarProperty Name="BDSatellite" ColumnName="BDSatellite" />
+                <ScalarProperty Name="BDmember" ColumnName="BDmember" />
+                <ScalarProperty Name="VoltageMin" ColumnName="VoltageMin" />
+                <ScalarProperty Name="maintran" ColumnName="maintran" />
+                <ScalarProperty Name="subtran" ColumnName="subtran" />
+                <ScalarProperty Name="dataprotocol" ColumnName="dataprotocol" />
+                <ScalarProperty Name="watersensor" ColumnName="watersensor" />
+                <ScalarProperty Name="rainsensor" ColumnName="rainsensor" />
+                <ScalarProperty Name="reportinterval" ColumnName="reportinterval" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rain">
+            <EntityTypeMapping TypeName="Database.rain">
+              <MappingFragment StoreEntitySet="rain">
+                <ScalarProperty Name="stationid" ColumnName="stationid" />
+                <ScalarProperty Name="datatime" ColumnName="datatime" />
+                <ScalarProperty Name="periodrain" ColumnName="periodrain" />
+                <ScalarProperty Name="differencerain" ColumnName="differencerain" />
+                <ScalarProperty Name="totalrain" ColumnName="totalrain" />
+                <ScalarProperty Name="dayrain" ColumnName="dayrain" />
+                <ScalarProperty Name="transtype" ColumnName="transtype" />
+                <ScalarProperty Name="messagetype" ColumnName="messagetype" />
+                <ScalarProperty Name="recvdatatime" ColumnName="recvdatatime" />
+                <ScalarProperty Name="state" ColumnName="state" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SerialPort">
+            <EntityTypeMapping TypeName="Database.SerialPort">
+              <MappingFragment StoreEntitySet="SerialPort">
+                <ScalarProperty Name="PortNumber" ColumnName="PortNumber" />
+                <ScalarProperty Name="TransType" ColumnName="TransType" />
+                <ScalarProperty Name="Baudrate" ColumnName="Baudrate" />
+                <ScalarProperty Name="Databit" ColumnName="Databit" />
+                <ScalarProperty Name="Stopbit" ColumnName="Stopbit" />
+                <ScalarProperty Name="Parity" ColumnName="Parity" />
+                <ScalarProperty Name="Stream" ColumnName="Stream" />
+                <ScalarProperty Name="Break" ColumnName="Break" />
+                <ScalarProperty Name="Open" ColumnName="Open" />
+                <ScalarProperty Name="dataprotocol" ColumnName="dataprotocol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="soildata">
+            <EntityTypeMapping TypeName="Database.soildata">
+              <MappingFragment StoreEntitySet="soildata">
+                <ScalarProperty Name="StationID" ColumnName="StationID" />
+                <ScalarProperty Name="DataTime" ColumnName="DataTime" />
+                <ScalarProperty Name="Voltage" ColumnName="Voltage" />
+                <ScalarProperty Name="Voltage10" ColumnName="Voltage10" />
+                <ScalarProperty Name="Moisture10" ColumnName="Moisture10" />
+                <ScalarProperty Name="Voltage20" ColumnName="Voltage20" />
+                <ScalarProperty Name="Moisture20" ColumnName="Moisture20" />
+                <ScalarProperty Name="Voltage30" ColumnName="Voltage30" />
+                <ScalarProperty Name="Moistrue30" ColumnName="Moistrue30" />
+                <ScalarProperty Name="Voltage40" ColumnName="Voltage40" />
+                <ScalarProperty Name="Moistrue40" ColumnName="Moistrue40" />
+                <ScalarProperty Name="Voltage60" ColumnName="Voltage60" />
+                <ScalarProperty Name="Moistrue60" ColumnName="Moistrue60" />
+                <ScalarProperty Name="TransType" ColumnName="TransType" />
+                <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+                <ScalarProperty Name="recvdatatime" ColumnName="recvdatatime" />
+                <ScalarProperty Name="state" ColumnName="state" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="soilstation">
+            <EntityTypeMapping TypeName="Database.soilstation">
+              <MappingFragment StoreEntitySet="soilstation">
+                <ScalarProperty Name="stationid" ColumnName="stationid" />
+                <ScalarProperty Name="subcenterid" ColumnName="subcenterid" />
+                <ScalarProperty Name="cname" ColumnName="cname" />
+                <ScalarProperty Name="ctype" ColumnName="ctype" />
+                <ScalarProperty Name="A10" ColumnName="A10" />
+                <ScalarProperty Name="B10" ColumnName="B10" />
+                <ScalarProperty Name="C10" ColumnName="C10" />
+                <ScalarProperty Name="D10" ColumnName="D10" />
+                <ScalarProperty Name="M10" ColumnName="M10" />
+                <ScalarProperty Name="N10" ColumnName="N10" />
+                <ScalarProperty Name="A20" ColumnName="A20" />
+                <ScalarProperty Name="B20" ColumnName="B20" />
+                <ScalarProperty Name="C20" ColumnName="C20" />
+                <ScalarProperty Name="D20" ColumnName="D20" />
+                <ScalarProperty Name="M20" ColumnName="M20" />
+                <ScalarProperty Name="N20" ColumnName="N20" />
+                <ScalarProperty Name="A30" ColumnName="A30" />
+                <ScalarProperty Name="B30" ColumnName="B30" />
+                <ScalarProperty Name="C30" ColumnName="C30" />
+                <ScalarProperty Name="D30" ColumnName="D30" />
+                <ScalarProperty Name="M30" ColumnName="M30" />
+                <ScalarProperty Name="N30" ColumnName="N30" />
+                <ScalarProperty Name="A40" ColumnName="A40" />
+                <ScalarProperty Name="B40" ColumnName="B40" />
+                <ScalarProperty Name="C40" ColumnName="C40" />
+                <ScalarProperty Name="D40" ColumnName="D40" />
+                <ScalarProperty Name="M40" ColumnName="M40" />
+                <ScalarProperty Name="N40" ColumnName="N40" />
+                <ScalarProperty Name="A60" ColumnName="A60" />
+                <ScalarProperty Name="B60" ColumnName="B60" />
+                <ScalarProperty Name="C60" ColumnName="C60" />
+                <ScalarProperty Name="D60" ColumnName="D60" />
+                <ScalarProperty Name="M60" ColumnName="M60" />
+                <ScalarProperty Name="N60" ColumnName="N60" />
+                <ScalarProperty Name="voltagemin" ColumnName="voltagemin" />
+                <ScalarProperty Name="gsm" ColumnName="gsm" />
+                <ScalarProperty Name="gprs" ColumnName="gprs" />
+                <ScalarProperty Name="bdsatellite" ColumnName="bdsatellite" />
+                <ScalarProperty Name="bdmember" ColumnName="bdmember" />
+                <ScalarProperty Name="maintran" ColumnName="maintran" />
+                <ScalarProperty Name="subtran" ColumnName="subtran" />
+                <ScalarProperty Name="dataprotocol" ColumnName="dataprotocol" />
+                <ScalarProperty Name="reportinterval" ColumnName="reportinterval" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ST_ZQ_B">
+            <EntityTypeMapping TypeName="Database.ST_ZQ_B">
+              <MappingFragment StoreEntitySet="ST_ZQ_B">
+                <ScalarProperty Name="stationid" ColumnName="stationid" />
+                <ScalarProperty Name="BGTM" ColumnName="BGTM" />
+                <ScalarProperty Name="PTNO" ColumnName="PTNO" />
+                <ScalarProperty Name="ZR" ColumnName="ZR" />
+                <ScalarProperty Name="Q1" ColumnName="Q1" />
+                <ScalarProperty Name="Q2" ColumnName="Q2" />
+                <ScalarProperty Name="Q3" ColumnName="Q3" />
+                <ScalarProperty Name="Q4" ColumnName="Q4" />
+                <ScalarProperty Name="Q5" ColumnName="Q5" />
+                <ScalarProperty Name="Q6" ColumnName="Q6" />
+                <ScalarProperty Name="currQ" ColumnName="currQ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubCenter">
+            <EntityTypeMapping TypeName="Database.SubCenter">
+              <MappingFragment StoreEntitySet="SubCenter">
+                <ScalarProperty Name="SubCenterID" ColumnName="SubCenterID" />
+                <ScalarProperty Name="SubCenterName" ColumnName="SubCenterName" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="Database.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Administrator" ColumnName="Administrator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="voltage">
+            <EntityTypeMapping TypeName="Database.voltage">
+              <MappingFragment StoreEntitySet="voltage">
+                <ScalarProperty Name="stationid" ColumnName="stationid" />
+                <ScalarProperty Name="datatime" ColumnName="datatime" />
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="transtype" ColumnName="transtype" />
+                <ScalarProperty Name="messagetype" ColumnName="messagetype" />
+                <ScalarProperty Name="recvdatatime" ColumnName="recvdatatime" />
+                <ScalarProperty Name="state" ColumnName="state" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WarningInfo">
+            <EntityTypeMapping TypeName="Database.WarningInfo">
+              <MappingFragment StoreEntitySet="WarningInfo">
+                <ScalarProperty Name="InfoID" ColumnName="InfoID" />
+                <ScalarProperty Name="StationID" ColumnName="StationID" />
+                <ScalarProperty Name="DataTime" ColumnName="DataTime" />
+                <ScalarProperty Name="InfoDetail" ColumnName="InfoDetail" />
+                <ScalarProperty Name="ErroCode" ColumnName="ErroCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="water">
+            <EntityTypeMapping TypeName="Database.water">
+              <MappingFragment StoreEntitySet="water">
+                <ScalarProperty Name="stationid" ColumnName="stationid" />
+                <ScalarProperty Name="datatime" ColumnName="datatime" />
+                <ScalarProperty Name="waterstage" ColumnName="waterstage" />
+                <ScalarProperty Name="waterflow" ColumnName="waterflow" />
+                <ScalarProperty Name="transtype" ColumnName="transtype" />
+                <ScalarProperty Name="messagetype" ColumnName="messagetype" />
+                <ScalarProperty Name="recvdatatime" ColumnName="recvdatatime" />
+                <ScalarProperty Name="state" ColumnName="state" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

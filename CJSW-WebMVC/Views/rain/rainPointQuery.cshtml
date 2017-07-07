@@ -1,0 +1,112 @@
+﻿@model List<CJSW_WebMVC.Models.SubCenter>
+@{
+    ViewBag.Title = "点雨量查询";
+    ViewBag.rainActive = "active";
+    ViewBag.rainPointQueryActive = "active";
+}
+@Html.Partial("rainNav")
+<h2>@ViewBag.Title</h2>
+
+<p>@ViewBag.content</p>
+
+<!-- 右边主体部分 -->
+<div id="content">
+    <div class="bg-info">点雨量查询</div>
+    <div class="area-rain-box">
+        <!-- 搜索栏 -->
+        <div id="search-bar">
+            @using (Html.BeginForm("rainPointQuery", "rain", FormMethod.Get, new { @class = "navbar-form", @role = "search" })) {
+                <div class="form-group">
+                    <label>功能:</label>
+                    @{ 
+                        List<SelectListItem> typeList = new List<SelectListItem> {
+                        new SelectListItem { Text = "降雨累计", Value = "sum",Selected = true},
+                        new SelectListItem { Text = "日雨量", Value = "day"},
+                        new SelectListItem { Text = "时段雨量", Value = "period"},
+                        new SelectListItem { Text = "旬雨量", Value = "ten-days" } };
+                    }
+                    @Html.DropDownList("type", typeList)
+                    <label>分类:</label>
+                    @{
+                        List<SelectListItem> subcenterList = new List<SelectListItem> { new SelectListItem { Text = "所有站", Value = "0", Selected = true } };
+                        var subcenters = CJSW_WebMVC.DAL.SubCenterHandler.allCenter();
+                        foreach (var subcenter in subcenters)
+                        {
+                            subcenterList.Add(new SelectListItem { Text = subcenter.SubCenterName, Value = ""+subcenter.SubCenterID });
+                        }
+                    }
+                    @Html.DropDownList("subcenter", subcenterList);
+                    <label>从</label>
+                    @Html.TextBox("from","",new { @type="text",@id="startTimePicker",@autoclose="true"})
+                    <label>至</label>
+                    @Html.TextBox("to","",new { @type="text",@id="endTimePicker",@autoclose="true"})
+                    <label>雨量标准</label>
+                    @Html.TextBox("standard","",new { @type = "text",@textalign="right"})
+                     <label>mm</label>
+                </div>
+                <button type="submit" class="btn btn-default">查询</button>
+}
+            <button class="btn btn-default">导出Excel</button>
+            <button class="btn btn-default" onclick="window.location='降雨量级统计.html'">降雨量级统计</button>
+
+        </div>
+        <table class="table">
+            <tr>
+                <th>站名</th>
+                <th>所在县</th>
+                <th>累计</th>
+                <th>1日</th>
+                <th>2日</th>
+                <th>3日</th>
+                <th>所在乡</th>
+                <th>站码</th>
+            </tr>
+            <tr>
+                <td><a href="单站点雨量.html">双桥水库</a></td>
+                <td>永兴县</td>
+                <td>32.6</td>
+                <td>32.6</td>
+                <td></td>
+                <td></td>
+                <td>碧塘乡</td>
+                <td>611H0606</td>
+            </tr>
+            <tr>
+                <td><a href="单站点雨量.html">双江水库</a></td>
+                <td>邵阳水库</td>
+                <td>31.0</td>
+                <td></td>
+                <td>31.0</td>
+                <td></td>
+                <td>岩口铺镇</td>
+                <td>611H0303</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+<script>
+        var t = new Date();
+        var startTime = t.getFullYear() + "-" + t.getMonth() + "-" + (t.getDate() - 2);
+        var endTime = t.getFullYear() + "-" + t.getMonth() + "-" + t.getDate();
+        document.getElementById("startTimePicker").setAttribute("value", startTime);
+        document.getElementById("endTimePicker").setAttribute("value", endTime);
+        $('#startTimePicker').datetimepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            minView: '2',
+            startView: 'month',
+            showMeridian: true
+        });
+        $('#endTimePicker').datetimepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            minView: '2',
+            startView: 'month',
+            showMeridian: true,
+            todayBtn: true
+        });
+</script>

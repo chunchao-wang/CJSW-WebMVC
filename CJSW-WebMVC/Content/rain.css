@@ -1,0 +1,22 @@
+#rain-nav {
+  float:left;
+  width:200px;
+  margin-left:10px;
+  margin-top: 20px;
+}
+#realTimeRainNav {
+  margin-top: 20px;
+}
+#rainstormReportBox {
+  overflow: auto;
+}
+#rainstormHistoryBox {
+  overflow: auto;
+}
+#rain-monitor-box {
+  overflow: auto;
+}
+
+#content{
+  overflow: auto;
+}

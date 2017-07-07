@@ -1,0 +1,74 @@
+.container{
+  margin:0px;
+}
+#content{
+  width:100%;
+  padding-left: 200px;
+}
+table{
+  text-align: center;
+
+}
+table tr th {
+  text-align: center;
+    border: 2px solid white;
+}
+.page{
+  margin-left: auto;
+  margin-right: auto;
+  width: 700px;
+  padding: 30px;
+  margin-top: 20px;
+}
+#menu{
+  width:100%;
+  height:40px;
+  display: inline-block;
+}
+#navBox{
+  height:250px;
+}
+#rain-nav {
+  float:left;
+  display:inline-block;
+  margin-left: 0;
+  margin-top: 20px;
+  width:200px;
+}
+
+#rainMonitor {
+  margin-left:202px;
+  width:80%;
+}
+#realTimeRainNav{
+  margin-top:20px;
+}
+
+#realTimeRainTable {
+  overflow: scroll;
+}
+
+#rainTableBox{
+  margin:20px;
+  width:200px;
+  float:left;
+}
+
+#stationRainChart {
+	margin-left: 300px;
+	min-width: 310px;
+	max-width: 800px;
+	height: 400px;
+}
+
+#rainstormReportBox{
+  margin-left: 202px;
+  width:80%;
+}
+.green{
+  color:green;
+}
+
+.red{
+  color:red;
+}

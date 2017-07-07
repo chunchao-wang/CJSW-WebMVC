@@ -1,0 +1,13 @@
+﻿
+
+<nav id="rain-nav">
+    <ul class="nav nav-pills nav-stacked">
+        <li role="presentation" class="@ViewBag.rainMonitorActive">@Html.ActionLink("降雨分布图", "monitor")</li>
+        <li role="presentation" class="@ViewBag.rainRealTimeActive">@Html.ActionLink("降雨监控", "realTime")</li>
+        <li role="presentation" class="@ViewBag.rainReportActive">@Html.ActionLink("降雨报表", "rainReport")</li>
+        <li role="presentation" class="@ViewBag.rainAreaStatisticActive">@Html.ActionLink("面雨量统计", "rainAreaStatistic")</li>
+        <li role="presentation" class="@ViewBag.rainPointQueryActive">@Html.ActionLink("点雨量查询", "rainPointQuery")</li>
+        <li role="presentation" class="disabled"><a>雨量极值查询</a></li>
+        @*<li role="presentation" class="disabled">@Html.ActionLink("雨量极值查询","#")</li>*@
+    </ul>
+</nav>

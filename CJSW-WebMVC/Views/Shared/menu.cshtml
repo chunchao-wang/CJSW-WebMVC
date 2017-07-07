@@ -1,0 +1,36 @@
+﻿@*该页面显示了顶部菜单栏，是整个项目的最外部框架，所有页面加载时会自动加载该页面。
+
+    需要传入的ViewBag参数包括：
+    Title:页面标题
+    MonitorActive:值班监控页面是否激活（active表示当前页面）
+    RainActive:雨情页面是否激活
+    WaterActive:水情页面是否激活
+    SoilActive:墒情页面是否激活
+    StatusActive:工况页面是否激活
+    SettingsActive:设置页面是否激活
+*@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>
+        @ViewBag.Title
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <div id="menu">
+        <ul class="nav nav-pills nav stacked">
+            <li role="presentation" class="@ViewBag.monitorActive"><a>值班监控</a></li>
+            <li role="presentation" class="@ViewBag.rainActive"><a>雨情</a></li>
+            <li role="presentation" class="@ViewBag.waterActive"><a>水情</a></li>
+            <li role="presentation" class="@ViewBag.soilActive"><a>熵情</a></li>
+            <li role="presentation" class="@ViewBag.statusActive"><a>工况</a></li>
+            <li role="presentation" class="@ViewBag.settingActive"><a>系统设置</a></li>
+        </ul>
+    </div>
+    @RenderBody()
+</body>
+</html>

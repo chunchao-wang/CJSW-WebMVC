@@ -1,0 +1,56 @@
+.point {
+  position: absolute;
+  border: black 1px solid;
+  border-radius: 50%;
+  background-color: #00ff12;
+  width: 7px;
+  height: 7px;
+}
+.alert-point {
+  color:red;
+  position: absolute;
+  border: black 1px solid;
+  border-radius: 50%;
+  background-color: red;
+  width: 7px;
+  height: 7px;
+  animation: bling 1s infinite;
+  -webkit-animation:bling 1s infinite;
+  -moz-animation:bling 1s infinite;
+  -o-animation:bling 1s infinite;
+}
+.triangle{
+  position: absolute;
+  width:0px;
+  height:0px;
+  border:7px solid transparent;
+  border-bottom:  10px solid #337ab7;
+}
+#map {
+  float:left;
+display: block;
+margin-left: 0px;
+}
+#map-img{
+  float:left;
+}
+@keyframes bling
+{
+  0%    {opacity:0;}
+  100%  {opacity: 0.5;transform: scale(2,2);border:none;}
+}
+@-webkit-keyframes bling
+{
+  0%    {opacity:0;width:7px;height:7px;}
+  100%  {opacity: 0.5;transform: scale(2,2);border:none;}
+}
+@-moz-keyframes bling
+{
+  0%    {opacity:0;width:7px;height:7px;}
+  100%  {opacity: 0.5;transform: scale(2,2);border:none;}
+}
+@-o-keyframes bling
+{
+  0%    {opacity:0;width:7px;height:7px;}
+  100%  {opacity: 0.5;transform: scale(2,2);border:none;}
+}
