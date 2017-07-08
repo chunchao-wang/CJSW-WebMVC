@@ -8,13 +8,13 @@ namespace CJSW_WebMVC.Models
     public class DayRain
     {
         //站点编号
-        public string stationid { get; set; }
+        public string StationId { get; set; }
         //站名
-        public string cname { get; set; }
+        public string stationName { get; set; }
         //河流名
-        public string RVNM { get; set; }
+        public string riverName { get; set; }
         //流域
-        public string Basin { get; set; }
+        public string basinName { get; set; }
         //
 
     }

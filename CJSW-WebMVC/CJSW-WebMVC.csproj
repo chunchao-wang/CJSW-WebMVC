@@ -154,8 +154,9 @@
     <Compile Include="Controllers\rainController.cs" />
     <Compile Include="DAL\DBContext.cs" />
     <Compile Include="DAL\RainHandler.cs" />
-    <Compile Include="DAL\RainStationHandler.cs" />
+    <Compile Include="DAL\StationHandler.cs" />
     <Compile Include="DAL\SubCenterHandler.cs" />
+    <Compile Include="DAO\realTime.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -182,10 +183,12 @@
       <DependentUpon>Database.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Models\QueryResult.cs" />
     <Compile Include="Models\rain.cs">
       <DependentUpon>Database.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Models\Record.cs" />
     <Compile Include="Models\SerialPort.cs">
       <DependentUpon>Database.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -198,6 +201,8 @@
       <DependentUpon>Database.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Models\Station.cs" />
+    <Compile Include="Models\StationType.cs" />
     <Compile Include="Models\ST_ZQ_B.cs">
       <DependentUpon>Database.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

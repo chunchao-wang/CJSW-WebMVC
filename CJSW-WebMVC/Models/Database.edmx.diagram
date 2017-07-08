@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="Database.rain" Width="1.5" PointX="0.625" PointY="0.5" IsExpanded="false" />
         <EntityTypeShape EntityType="Database.SerialPort" Width="1.5" PointX="5.625" PointY="1.375" IsExpanded="false" />
         <EntityTypeShape EntityType="Database.soildata" Width="1.5" PointX="5.625" PointY="4.25" IsExpanded="false" />
-        <EntityTypeShape EntityType="Database.soilstation" Width="1.5" PointX="3" PointY="4.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="Database.soilstation" Width="1.5" PointX="1.5" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Database.ST_ZQ_B" Width="1.5" PointX="5.625" PointY="2.25" IsExpanded="false" />
         <EntityTypeShape EntityType="Database.SubCenter" Width="1.5" PointX="3" PointY="2.875" IsExpanded="false" />
         <EntityTypeShape EntityType="Database.User" Width="1.5" PointX="5.625" PointY="0.5" IsExpanded="false" />

@@ -5,9 +5,9 @@ using System.Web;
 
 namespace CJSW_WebMVC.DAL
 {
-    public class RainStationHandler
+    public class StationHandler
     {
-        public static IQueryable<Models.hydlstation> rainStation(int? SubCenterID)
+        public static IQueryable<Models.hydlstation> station(long? SubCenterID)
         {
             if (SubCenterID.HasValue)
             {

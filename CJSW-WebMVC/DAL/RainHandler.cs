@@ -36,9 +36,9 @@ namespace CJSW_WebMVC.DAL
         /// <param name="to">查询结束时间点</param>
         /// <param name="station">站点编号</param>
         /// <returns>可以再次进行筛选的结果集</returns>
-        public static IQueryable<Models.rain> singleRainRecord(DateTime from, DateTime to, string station)
+        public static IQueryable<Models.rain> singleRainRecord(DateTime from, DateTime to, long stationId)
         {
-            return DBContext.db.rain.Where(r => r.stationid == station && r.datatime >= from && r.datatime <= to);
+            return DBContext.db.rain.Where(r => r.stationid == stationId.ToString() && r.datatime >= from && r.datatime <= to);
         }
     }
 }
