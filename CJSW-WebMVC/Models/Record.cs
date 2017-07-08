@@ -11,6 +11,6 @@ namespace CJSW_WebMVC.Models
     public class Record
     {
         public Station station;
-        public List<Nullable<double>> datas;
+        public List<Nullable<decimal>> datas;
     }
 }

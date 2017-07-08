@@ -10,24 +10,32 @@ namespace CJSW_WebMVC.DAL
         ///时间格式：YYYYMMDDhh
         /// int.max=2147483647(够用到2147年)
         /// <summary>
-        /// 查找多站的降雨记录结果
-        /// 记录与数据库中rain表结构一致
+        /// 查找多站的降雨记录结果<see cref="Models.Record"/>
         /// </summary>
         /// <param name="from">查询的开始时间</param>
         /// <param name="to">查询的结束时间</param>
         /// <param name="subcenter">分中心的限定，为可变参数。如果没有填写则返回所有站点在给定时间内的记录</param>
-        public static IQueryable<Models.rain> multiRainRecord(DateTime from, DateTime to,int? subcenter)
+        public static List<Models.Record> multiRainRecord(DateTime from, DateTime to,int? subcenter)
         {
+            IQueryable<Models.rain> queryResult = null;
             if (subcenter.HasValue)
             {
-                IQueryable<string> stations = DBContext.db.hydlstation.Where(s => s.SubCenterID == subcenter).Select(s => s.StationID);
-                return DBContext.db.rain.Where(r => stations.Contains(r.stationid) && r.datatime >= from && r.datatime <= to);
+                //在数据库中做查询
+                IQueryable<string> stations = DBContext.db.hydlstation.Where(s => s.SubCenterID == subcenter).Select(s => s.StationID); 
+                queryResult = DBContext.db.rain.Where(r => stations.Contains(r.stationid) && r.datatime >= from && r.datatime <= to);
+                //将查询结果改写为目标格式
+                List<Models.Station> stations = DAL.StationHandler.station(subcenter.Value);
+
             }
             else
             {
-                return DBContext.db.rain.Where(r => r.datatime >= from && r.datatime <= to);
+                //在数据库中做查询
+                queryResult = DBContext.db.rain.Where(r => r.datatime >= from && r.datatime <= to);
+                //将查询结果改写为目标格式
+
             }
-            
+
+
         }
         /// <summary>
         /// 查找单站的雨量数据结果，查询结果与数据库中rain表结构相同。
