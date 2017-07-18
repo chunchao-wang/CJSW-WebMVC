@@ -95,6 +95,7 @@ namespace CJSW_WebMVC.Controllers
                 result.records.Add(record);
                 ViewData.Add("table",result);
             }
+            return View();
         }
     public ActionResult rainReport()
     {

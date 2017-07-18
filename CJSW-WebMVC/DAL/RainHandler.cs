@@ -20,12 +20,11 @@ namespace CJSW_WebMVC.DAL
             IQueryable<Models.rain> queryResult = null;
             if (subcenter.HasValue)
             {
-                //在数据库中做查询
-                IQueryable<string> stations = DBContext.db.hydlstation.Where(s => s.SubCenterID == subcenter).Select(s => s.StationID); 
-                queryResult = DBContext.db.rain.Where(r => stations.Contains(r.stationid) && r.datatime >= from && r.datatime <= to);
+                ////在数据库中做查询
+                //IQueryable<string> stations = DBContext.db.hydlstation.Where(s => s.SubCenterID == subcenter).Select(s => s.StationID); 
+                //queryResult = DBContext.db.rain.Where(r => stations.Contains(r.stationid) && r.datatime >= from && r.datatime <= to);
                 //将查询结果改写为目标格式
                 List<Models.Station> stations = DAL.StationHandler.station(subcenter.Value);
-
             }
             else
             {
@@ -34,6 +33,9 @@ namespace CJSW_WebMVC.DAL
                 //将查询结果改写为目标格式
 
             }
+
+            // TODO 根据站点的信息查询记录
+            return null;
 
 
         }

@@ -42,9 +42,11 @@ namespace CJSW_WebMVC.DAO
             }
             foreach(long stationId in stations)
             {
-                DAL.RainHandler.singleRainRecord(from, to, stationId).
-                result.records.Add();
+                //TODO 根据站点，逐站点查询记录
+                //DAL.RainHandler.singleRainRecord(from, to, stationId);
+                //result.records.Add();
             }
+            return result;
         }
     }
 }

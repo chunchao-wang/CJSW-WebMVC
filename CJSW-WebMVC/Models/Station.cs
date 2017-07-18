@@ -8,12 +8,12 @@ namespace CJSW_WebMVC.Models
     /// <summary>
     /// 站点信息的数据结构
     /// </summary>
-    public class Station
+    public class Station:IComparable<Station>
     {
         public Station(hydlstation raw)
         {
             stationName = raw.CName;
-            stationId = long.Parse(raw.StationID);
+            stationId = Int32.Parse(raw.StationID);
             subCenter = raw.SubCenter;
             switch (Int32.Parse(raw.CType))
             {
@@ -31,7 +31,7 @@ namespace CJSW_WebMVC.Models
         /// <summary>
         /// 站点编号
         /// </summary>
-        public long stationId;
+        public int stationId;
         /// <summary>
         /// 站点名称
         /// </summary>
@@ -41,6 +41,9 @@ namespace CJSW_WebMVC.Models
         /// </summary>
         public SubCenter subCenter;
 
-
+        public int CompareTo(Station other)
+        {
+            return stationId.CompareTo(other.stationId);
+        }
     }
 }
