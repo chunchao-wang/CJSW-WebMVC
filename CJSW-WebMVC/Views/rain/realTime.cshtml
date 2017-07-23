@@ -1,28 +1,16 @@
 ﻿
 @{
-    ViewBag.content = "实时降雨";
+        ViewBag.content = "实时降雨";
     ViewBag.rainActive = "active";
     ViewBag.rainRealTimeActive = "active";
 }
 
-@Html.Partial("rainNav")
-<h2>@ViewBag.title</h2>
-<p>@ViewBag.content</p>
-@{
-    // TODO 缺少数据提取输出部分代码
-    var table = ViewData["table"] as CJSW_WebMVC.Models.QueryResult;
-    List<String> th = table.dataTitles;
-    List<CJSW_WebMVC.Models.Record> records = table.records;
-
+    @Html.Partial("rainNav")
+    <h2>@ViewBag.title</h2>
+    <p>@ViewBag.content</p>
+@{ 
+    var datas = ViewData["table"] as CJSW_WebMVC.Models.QueryResult;
+    List<String> th = datas.dataTitles;
+    
 
 }
-<table class="table-bordered">
-    <tr>
-        @{
-            foreach (String head in th)
-            {
-                
-            }
-        }
-    </tr>
-</table>
