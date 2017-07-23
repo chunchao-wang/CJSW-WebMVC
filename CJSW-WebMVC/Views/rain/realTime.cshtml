@@ -1,6 +1,6 @@
 ﻿
 @{
-        ViewBag.content = "实时降雨";
+    ViewBag.content = "实时降雨";
     ViewBag.rainActive = "active";
     ViewBag.rainRealTimeActive = "active";
 }
@@ -9,8 +9,6 @@
     <h2>@ViewBag.title</h2>
     <p>@ViewBag.content</p>
 @{ 
-    var datas = ViewData["table"] as CJSW_WebMVC.Models.QueryResult;
-    List<String> th = datas.dataTitles;
-    
+    var datas = ViewData["data"];
 
 }
