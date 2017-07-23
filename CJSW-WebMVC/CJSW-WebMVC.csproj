@@ -155,14 +155,14 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\rainController.cs" />
     <Compile Include="DAL\DBContext.cs" />
-    <Compile Include="DAL\Local\LocationHandler.cs" />
     <Compile Include="DAL\RainHandler.cs" />
     <Compile Include="DAL\StationHandler.cs" />
     <Compile Include="DAL\SubCenterHandler.cs" />
-    <Compile Include="DAO\realTime.cs" />
+    <Compile Include="DAL\RealTimeService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Data.cs" />
     <Compile Include="Models\Database.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -178,7 +178,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\DayRain.cs" />
+    <Compile Include="Models\HourRain.cs" />
     <Compile Include="Models\hydlstation.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -197,8 +197,6 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Station.cs" />
-    <Compile Include="Models\StationLocation.cs" />
-    <Compile Include="Models\StationLocationList.cs" />
     <Compile Include="Models\StationType.cs" />
     <Compile Include="Models\ST_ZQ_B.cs">
       <DependentUpon>Database.tt</DependentUpon>
@@ -219,7 +217,6 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Test\StationHandlerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />

@@ -7,7 +7,10 @@ namespace CJSW_WebMVC.Models
 {
     public class QueryResult
     {
-        public List<String> dataTitles;
+        public QueryResult()
+        {
+            records = new List<Record>();
+        }
         public List<Record> records;
     }
 }

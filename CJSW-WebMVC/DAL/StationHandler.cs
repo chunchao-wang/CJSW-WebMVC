@@ -6,7 +6,12 @@ namespace CJSW_WebMVC.DAL
 {
     public class StationHandler
     {
-        public static List<Models.Station> listStation(int? SubCenterID)
+        /// <summary>
+        /// 根据分中心ID获取下辖所有站点的信息
+        /// </summary>
+        /// <param name="SubCenterID"></param>
+        /// <returns></returns>
+        public static List<Models.Station> ListStationBySubcenterId(int? SubCenterID)
         {
             //查询
             IQueryable<Models.hydlstation> queryResult = null;
@@ -26,7 +31,12 @@ namespace CJSW_WebMVC.DAL
             }
             return stations;
         }
-        public static List<string> listStationId(int? SubCenterID)
+        /// <summary>
+        /// 根据分中心ID获取下辖所有站点的ID
+        /// </summary>
+        /// <param name="SubCenterID"></param>
+        /// <returns></returns>
+        public static List<string> ListStationIdBySubcenterId(int? SubCenterID)
         {
             //查询
             IQueryable<Models.hydlstation> queryResult = null;
