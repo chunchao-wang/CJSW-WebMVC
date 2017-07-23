@@ -58,8 +58,8 @@ namespace CJSW_WebMVC.Controllers
                 minute: 0,
                 second: 0
             );
-            long? subcenterId = null;
-            List<Models.Station> stations = DAL.StationHandler.station(subcenterId);
+            int? subcenterId = null;
+            List<Models.Station> stations = DAL.StationHandler.listStation(subcenterId);
             #endregion
             //初始化查询结果
             Models.QueryResult result = new Models.QueryResult();

@@ -24,6 +24,7 @@ namespace CJSW_WebMVC.Models
                 default : stationType = StationTypes.unknownStation; break;
             }
         }
+
         /// <summary>
         /// 站点类型<see cref="Models.StationType"/>
         /// </summary>
@@ -45,5 +46,17 @@ namespace CJSW_WebMVC.Models
         {
             return stationId.CompareTo(other.stationId);
         }
+        public override bool Equals(object obj)
+        {
+            if (obj is Station)
+            {
+                return (obj as Station).stationId == this.stationId;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Database.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="version1_9Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="hydlstation">
           <Key>
             <PropertyRef Name="StationID" />
@@ -37,7 +37,7 @@
             <PropertyRef Name="datatime" />
           </Key>
           <Property Name="stationid" Type="char" MaxLength="4" Nullable="false" />
-          <Property Name="datatime" Type="datetime" Nullable="false" StoreGeneratedPattern="None" />
+          <Property Name="datatime" Type="datetime" Nullable="false" />
           <Property Name="periodrain" Type="numeric" Precision="18" Scale="1" />
           <Property Name="differencerain" Type="numeric" Precision="18" Scale="1" />
           <Property Name="totalrain" Type="numeric" Precision="18" Scale="1" />
@@ -51,7 +51,7 @@
           <Key>
             <PropertyRef Name="PortNumber" />
           </Key>
-          <Property Name="PortNumber" Type="int" Nullable="false" StoreGeneratedPattern="None" />
+          <Property Name="PortNumber" Type="int" Nullable="false" />
           <Property Name="TransType" Type="char" MaxLength="2" />
           <Property Name="Baudrate" Type="int" />
           <Property Name="Databit" Type="int" />
@@ -174,7 +174,7 @@
             <PropertyRef Name="datatime" />
           </Key>
           <Property Name="stationid" Type="char" MaxLength="4" Nullable="false" />
-          <Property Name="datatime" Type="datetime" Nullable="false" StoreGeneratedPattern="None" />
+          <Property Name="datatime" Type="datetime" Nullable="false" />
           <Property Name="data" Type="numeric" Precision="18" Scale="2" />
           <Property Name="transtype" Type="char" MaxLength="2" />
           <Property Name="messagetype" Type="char" MaxLength="1" />
@@ -289,7 +289,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DatabaseStoreContainer">
+        <EntityContainer Name="version1_9ModelStoreContainer">
           <EntitySet Name="hydlstation" EntityType="Self.hydlstation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rain" EntityType="Self.rain" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SerialPort" EntityType="Self.SerialPort" Schema="dbo" store:Type="Tables" />
@@ -334,12 +334,12 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Database" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="version1_9Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="hydlstation">
           <Key>
             <PropertyRef Name="StationID" />
           </Key>
-          <Property Name="StationID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="StationID" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="SubCenterID" Type="Int32" Nullable="false" />
           <Property Name="CName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CType" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
@@ -372,8 +372,8 @@
             <PropertyRef Name="stationid" />
             <PropertyRef Name="datatime" />
           </Key>
-          <Property Name="stationid" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="datatime" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="None" />
+          <Property Name="stationid" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="datatime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="periodrain" Type="Decimal" Precision="18" Scale="1" />
           <Property Name="differencerain" Type="Decimal" Precision="18" Scale="1" />
           <Property Name="totalrain" Type="Decimal" Precision="18" Scale="1" />
@@ -388,7 +388,7 @@
           <Key>
             <PropertyRef Name="PortNumber" />
           </Key>
-          <Property Name="PortNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="PortNumber" Type="Int32" Nullable="false" />
           <Property Name="TransType" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
           <Property Name="Baudrate" Type="Int32" />
           <Property Name="Databit" Type="Int32" />
@@ -515,8 +515,8 @@
             <PropertyRef Name="stationid" />
             <PropertyRef Name="datatime" />
           </Key>
-          <Property Name="stationid" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="datatime" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="None" />
+          <Property Name="stationid" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="datatime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="data" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="transtype" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
           <Property Name="messagetype" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
@@ -679,9 +679,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DatabaseStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="version1_9ModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="hydlstation">
-            <EntityTypeMapping TypeName="Database.hydlstation">
+            <EntityTypeMapping TypeName="version1_9Model.hydlstation">
               <MappingFragment StoreEntitySet="hydlstation">
                 <ScalarProperty Name="StationID" ColumnName="StationID" />
                 <ScalarProperty Name="SubCenterID" ColumnName="SubCenterID" />
@@ -708,7 +708,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="rain">
-            <EntityTypeMapping TypeName="Database.rain">
+            <EntityTypeMapping TypeName="version1_9Model.rain">
               <MappingFragment StoreEntitySet="rain">
                 <ScalarProperty Name="stationid" ColumnName="stationid" />
                 <ScalarProperty Name="datatime" ColumnName="datatime" />
@@ -724,7 +724,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SerialPort">
-            <EntityTypeMapping TypeName="Database.SerialPort">
+            <EntityTypeMapping TypeName="version1_9Model.SerialPort">
               <MappingFragment StoreEntitySet="SerialPort">
                 <ScalarProperty Name="PortNumber" ColumnName="PortNumber" />
                 <ScalarProperty Name="TransType" ColumnName="TransType" />
@@ -740,7 +740,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="soildata">
-            <EntityTypeMapping TypeName="Database.soildata">
+            <EntityTypeMapping TypeName="version1_9Model.soildata">
               <MappingFragment StoreEntitySet="soildata">
                 <ScalarProperty Name="StationID" ColumnName="StationID" />
                 <ScalarProperty Name="DataTime" ColumnName="DataTime" />
@@ -763,7 +763,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="soilstation">
-            <EntityTypeMapping TypeName="Database.soilstation">
+            <EntityTypeMapping TypeName="version1_9Model.soilstation">
               <MappingFragment StoreEntitySet="soilstation">
                 <ScalarProperty Name="stationid" ColumnName="stationid" />
                 <ScalarProperty Name="subcenterid" ColumnName="subcenterid" />
@@ -812,7 +812,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ST_ZQ_B">
-            <EntityTypeMapping TypeName="Database.ST_ZQ_B">
+            <EntityTypeMapping TypeName="version1_9Model.ST_ZQ_B">
               <MappingFragment StoreEntitySet="ST_ZQ_B">
                 <ScalarProperty Name="stationid" ColumnName="stationid" />
                 <ScalarProperty Name="BGTM" ColumnName="BGTM" />
@@ -829,7 +829,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SubCenter">
-            <EntityTypeMapping TypeName="Database.SubCenter">
+            <EntityTypeMapping TypeName="version1_9Model.SubCenter">
               <MappingFragment StoreEntitySet="SubCenter">
                 <ScalarProperty Name="SubCenterID" ColumnName="SubCenterID" />
                 <ScalarProperty Name="SubCenterName" ColumnName="SubCenterName" />
@@ -838,7 +838,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User">
-            <EntityTypeMapping TypeName="Database.User">
+            <EntityTypeMapping TypeName="version1_9Model.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="UID" ColumnName="UID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -848,7 +848,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="voltage">
-            <EntityTypeMapping TypeName="Database.voltage">
+            <EntityTypeMapping TypeName="version1_9Model.voltage">
               <MappingFragment StoreEntitySet="voltage">
                 <ScalarProperty Name="stationid" ColumnName="stationid" />
                 <ScalarProperty Name="datatime" ColumnName="datatime" />
@@ -861,7 +861,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WarningInfo">
-            <EntityTypeMapping TypeName="Database.WarningInfo">
+            <EntityTypeMapping TypeName="version1_9Model.WarningInfo">
               <MappingFragment StoreEntitySet="WarningInfo">
                 <ScalarProperty Name="InfoID" ColumnName="InfoID" />
                 <ScalarProperty Name="StationID" ColumnName="StationID" />
@@ -872,7 +872,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="water">
-            <EntityTypeMapping TypeName="Database.water">
+            <EntityTypeMapping TypeName="version1_9Model.water">
               <MappingFragment StoreEntitySet="water">
                 <ScalarProperty Name="stationid" ColumnName="stationid" />
                 <ScalarProperty Name="datatime" ColumnName="datatime" />

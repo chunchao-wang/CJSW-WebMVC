@@ -17,20 +17,20 @@ namespace CJSW_WebMVC.DAL
         /// <param name="subcenter">分中心的限定，为可变参数。如果没有填写则返回所有站点在给定时间内的记录</param>
         public static List<Models.Record> multiRainRecord(DateTime from, DateTime to,int? subcenter)
         {
-            IQueryable<Models.rain> queryResult = null;
+            List<Models.rain> queryResult = null;
             if (subcenter.HasValue)
             {
                 ////在数据库中做查询
                 //IQueryable<string> stations = DBContext.db.hydlstation.Where(s => s.SubCenterID == subcenter).Select(s => s.StationID); 
                 //queryResult = DBContext.db.rain.Where(r => stations.Contains(r.stationid) && r.datatime >= from && r.datatime <= to);
                 //将查询结果改写为目标格式
-                List<Models.Station> stations = DAL.StationHandler.station(subcenter.Value);
+                List<Models.Station> stations = DAL.StationHandler.listStation(subcenter.Value);
+                //queryResult = DBContext.db.rain.Where(r => stations.Contains(new Models.Station(r.stationid)) && r.datatime >= from && r.datatime <= to);
             }
             else
             {
                 //在数据库中做查询
-                queryResult = DBContext.db.rain.Where(r => r.datatime >= from && r.datatime <= to);
-                //将查询结果改写为目标格式
+                queryResult = DBContext.db.rain.Where(r => r.datatime >= from && r.datatime <= to).ToList();
 
             }
 
