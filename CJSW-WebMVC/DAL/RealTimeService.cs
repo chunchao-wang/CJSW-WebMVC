@@ -5,7 +5,7 @@ using System.Web;
 using CJSW_WebMVC.Models;
 namespace CJSW_WebMVC.DAL
 {
-    public class realTime
+    public class RealTimeService
     {
         /// <summary>
         /// 根据起始时间和结束时间获取按小时为单位的降雨量信息。可以包含多站的信息
@@ -14,65 +14,114 @@ namespace CJSW_WebMVC.DAL
         /// <param name="from"></param>
         /// <param name="to"></param>
         /// <returns></returns>
-        public static QueryResult getRainByHour(List<string> stations, DateTime from, DateTime to)
+        public static QueryResult GetTodayRain(List<string> stationIds)
         {
-            if (stations == null || stations.Count == 0)
+            //查询为空
+            if (stationIds == null || stationIds.Count == 0)
             {
                 return new QueryResult();
             }
-            if (to <= from)
-            {
-                Console.WriteLine("查询时间设置错误！");
-                return new QueryResult();
-            }
+            DateTime now = DateTime.Now;
+            DateTime fromTime = new DateTime(
+                year: now.Year,
+                month: now.Month,
+                day: now.Day,
+                hour: 8,
+                minute: 0,
+                second: 0
+                );
+            DateTime toTime = new DateTime(
+                year: now.Year,
+                month: now.Month,
+                day: now.Day,
+                hour: now.Hour,
+                minute: 0,
+                second: 0
+                );
+            //早上8点之前，起始时间往前推一天
+            if (now.Hour < Conf.Constants.DAYBOUNDARY)
+                fromTime = fromTime.AddDays(-1);
             QueryResult result = new QueryResult();
-            IQueryable<HourRain> records = RainHandler.ListHourRain(from, to, stations);
-            foreach(string station in stations)
+            //构造时间节点列表
+            List<DateTime> times = new List<DateTime>();
+            for (DateTime t = toTime; t >= fromTime; t = t.AddHours(-1))
             {
-
+                times.Add(t);
+            }
+            IQueryable<rain> records = RainHandler.ListHourRain(fromTime, toTime, stationIds);
+            foreach (string stationId in stationIds)
+            {
+                IQueryable<rain> singleStationRecords = records.Where(r => r.stationid.Equals(stationId));
+                Record stationInfo = new Record();
+                stationInfo.station = StationHandler.getStationById(stationId);
+                foreach (DateTime t in times)
+                {
+                    //没有元素不能First()!
+                    IQueryable<decimal?> datas = from rain in singleStationRecords where rain.datatime == t select rain.totalrain;
+                    decimal? data = datas.Count() > 0 ? datas.First() : null;
+                    stationInfo.datas.Add(new HourRain(t, data));
+                }
+                result.records.Add(stationInfo);
             }
             return result;
         }
-        //public static QueryResult queryTodayRain(DateTime today, List<long> stations)
-        //{
-        //    //初始化查询条件
-        //    DateTime from = new DateTime(
-        //        year: today.Year,
-        //        month: today.Month,
-        //        day: today.Day,
-        //        hour: 8,
-        //        minute: 0,
-        //        second: 0
-        //    );
-        //    DateTime to = new DateTime(
-        //        year: today.Year,
-        //        month: today.Month,
-        //        day: today.Day,
-        //        hour: DateTime.Now.Hour,
-        //        minute: 0,
-        //        second: 0
-        //    );
-        //    //初始化查询结果
-        //    QueryResult result = new QueryResult();
-        //    //为查询结果添加表头
-        //    result.dataTitles.Add("站号");
-        //    result.dataTitles.Add("站名");
-        //    result.dataTitles.Add("站类");
-        //    result.dataTitles.Add("所在地");
-        //    int endHour = DateTime.Now.Hour;
-        //    int current = 8;
-        //    while (current < endHour)
-        //    {
-        //        result.dataTitles.Add((endHour-1) + "-" + endHour);
-        //        endHour--;
-        //    }
-        //    foreach(long stationId in stations)
-        //    {
-        //        DAL.RainHandler.singleRainRecord(from, to, stationId);
-        //        //TODO 添加站点雨量信息
-        //        //result.records.Add();
-        //    }
-        //    return result;
-        //}
+        /// <summary>
+        /// 根据给定时间查询
+        /// </summary>
+        /// <param name="fromTime"></param>
+        /// <param name="toTime"></param>
+        /// <param name="stationIds"></param>
+        /// <returns></returns>
+        public static QueryResult QueryHourRain(DateTime fromTime, DateTime toTime, List<string> stationIds)
+        {
+            //查询为空
+            if (stationIds == null || stationIds.Count == 0)
+            {
+                return new QueryResult();
+            }
+            //时间条件异常
+            if (fromTime >= toTime.AddHours(-1))
+            {
+                return new QueryResult();
+            }
+            //构建时间列表
+            List<DateTime> times = new List<DateTime>();
+            DateTime current = new DateTime(
+                year: toTime.Year,
+                month: toTime.Month,
+                day: toTime.Day,
+                hour: toTime.Hour,
+                minute: 0,
+                second: 0);
+            for (; current >= fromTime; current = current.AddHours(-1))
+            {
+                times.Add(current);
+            }
+            //获取数据
+            IQueryable<Models.rain> records = RainHandler.ListHourRain(fromTime, toTime, stationIds);
+            QueryResult result = new QueryResult();
+            foreach (string stationId in stationIds)
+            {
+                IQueryable<rain> singleStationRecords = records.Where(r => r.stationid.Equals(stationId));
+                Record record = new Record();
+                record.station = StationHandler.getStationById(stationId);
+                foreach(DateTime t in times)
+                {
+                    decimal? data;
+                    IQueryable<decimal?> datas = from rain in singleStationRecords where rain.datatime == t select rain.periodrain;
+                    if(datas == null || datas.Count() == 0)
+                    {
+                        data = null;
+                    }
+                    else
+                    {
+                        data = datas.First();
+                    }
+                    record.datas.Add(new HourRain(t, data));
+                }
+                result.records.Add(record);
+            }
+            return result;
+        }
     }
 }

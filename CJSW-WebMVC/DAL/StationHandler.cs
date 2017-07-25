@@ -54,5 +54,14 @@ namespace CJSW_WebMVC.DAL
             stationIds = (from station in queryResult select station.StationID).ToList();
             return stationIds;
         }
+        /// <summary>
+        /// 根据站点ID返回给定站点信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static Models.Station getStationById(string id)
+        {
+            return new Models.Station(DBContext.db.hydlstation.Where(s => s.StationID == id).First());
+        }
     }
 }

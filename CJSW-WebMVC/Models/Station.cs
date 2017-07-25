@@ -14,6 +14,7 @@ namespace CJSW_WebMVC.Models
         {
             stationName = raw.CName;
             stationId = Int32.Parse(raw.StationID);
+            //station信息中有subcenter外键约束，因此可以直接赋值subcenter获取完整subcenter信息。
             subCenter = raw.SubCenter;
             switch (Int32.Parse(raw.CType))
             {
@@ -56,6 +57,10 @@ namespace CJSW_WebMVC.Models
             {
                 return false;
             }
+        }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode()+this.stationId;
         }
 
     }

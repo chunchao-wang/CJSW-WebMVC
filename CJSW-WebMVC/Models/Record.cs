@@ -10,6 +10,10 @@ namespace CJSW_WebMVC.Models
     /// </summary>
     public class Record
     {
+        public Record()
+        {
+            datas = new List<HourRain>();
+        }
         public Station station;
         public List<HourRain> datas;
     }
