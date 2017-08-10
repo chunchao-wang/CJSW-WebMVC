@@ -13,7 +13,7 @@ namespace CJSW_WebMVC.Models
         public Station(hydlstation raw)
         {
             stationName = raw.CName;
-            stationId = Int32.Parse(raw.StationID);
+            stationId = raw.StationID;
             //station信息中有subcenter外键约束，因此可以直接赋值subcenter获取完整subcenter信息。
             subCenter = raw.SubCenter;
             switch (Int32.Parse(raw.CType))
@@ -33,11 +33,11 @@ namespace CJSW_WebMVC.Models
         /// <summary>
         /// 站点编号
         /// </summary>
-        public int stationId;
+        public string stationId;
         /// <summary>
         /// 站点名称
         /// </summary>
-        public String stationName;
+        public string stationName;
         /// <summary>
         /// 从属于哪个分中心
         /// </summary>
@@ -60,7 +60,7 @@ namespace CJSW_WebMVC.Models
         }
         public override int GetHashCode()
         {
-            return base.GetHashCode()+this.stationId;
+            return base.GetHashCode()+this.stationId.GetHashCode();
         }
 
     }

@@ -8,15 +8,15 @@ namespace CJSW_WebMVC.DAL
     public class UserService
     {
         /// <summary>
-        /// 用户登陆操作，需要用户名和密码，返回的是登陆状态和提示信息。获取用户信息则需要使用<see cref="getUser(string)"/>
+        /// 用户登陆操作，需要用户名和密码，返回的是登陆状态和提示信息，并且将登陆状态存在登陆表中<see cref="Persistence.UserStatus"/>。获取用户信息则需要使用<see cref="getUser(string)"/>
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <param name="errorMessage"></param>
         /// <returns></returns>
-        public static bool login(string username,string password,out string errorMessage)
+        public static bool Login(string username,string password,out string errorMessage)
         {
-            User user = UserHandler.getUser(username);
+            User user = UserHandler.GetUser(username);
             if(user == null)
             {
                 errorMessage = Conf.MessageInfo.USER_NOT_EXIST;
@@ -31,6 +31,8 @@ namespace CJSW_WebMVC.DAL
                 }
                 else
                 {
+                    //将登陆状态保存在服务器上
+                    Persistence.UserStatus.Add(user);
                     errorMessage = Conf.MessageInfo.LOGIN_SUCCESS;
                     return true;
                 }
@@ -41,9 +43,9 @@ namespace CJSW_WebMVC.DAL
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public static User getUser(string username)
+        public static User GetUser(string username)
         {
-            return UserHandler.getUser(username);
+            return UserHandler.GetUser(username);
         }
     }
 }

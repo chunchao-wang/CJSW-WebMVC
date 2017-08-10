@@ -1,14 +1,56 @@
-﻿
+﻿@using CJSW_WebMVC.Models
+@using CJSW_WebMVC.Conf
 @{
     ViewBag.content = "实时降雨";
     ViewBag.rainActive = "active";
     ViewBag.rainRealTimeActive = "active";
 }
+    <style>
+        table {
+            border-width:2px;
 
-    @Html.Partial("rainNav")
-    <h2>@ViewBag.title</h2>
-    <p>@ViewBag.content</p>
+        }
+        table tr th {
+            min-width:40px;
+            text-align: center;
+        }
+    </style>
+@Html.Partial("rainNav")
+<h2>@ViewBag.title</h2>
+<p>@ViewBag.content</p>
 @{ 
-    var datas = ViewData["data"];
-
+    QueryResult datas = (QueryResult)ViewData["realTimeRain"];
+    
 }
+<!-- 显示完整的表格-->
+<table id="realTimeRainTable">
+    <tr>
+        <th>站名</th>
+        <th>站类</th>
+        <th>辖区</th>
+        @{
+            List<HourRain> rains = datas.records[0].datas;
+            List<DateTime> times = (from rain in rains select rain.time).ToList();
+            foreach (DateTime time in times)
+            {
+                @Html.Raw("<th>" + time.AddHours(-1).Hour + ":00 -- " + time.Hour + ":00" + "</th>");
+            }
+        }
+    </tr>
+    @{
+        foreach (Record record in datas.records)
+        {
+            Station station = record.station;
+            @Html.Raw("<tr>");
+            @Html.Raw("<td><a href=\"station/rain?stationid="+station.stationId+"\">"+station.stationName+"</a></td>");
+            @Html.Raw("<td>" + MessageInfo.GetStationTypeDisplay(station.stationType) + "</td>");
+            @Html.Raw("<td>"+ station.subCenter.SubCenterName + "</td>");
+            foreach (HourRain rain in record.datas)
+            {
+
+                @Html.Raw("<td>" + (rain.data >= 0 ? rain.data.ToString("F") : "-") + "</td>");
+            }
+            @Html.Raw("</tr>")
+        }
+    }
+</table>

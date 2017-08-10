@@ -7,7 +7,7 @@ namespace CJSW_WebMVC.DAL
 {
     public class StationService
     {
-        public static List<Station> listStationBySubcenterId(List<int> subcenterIds)
+        public static List<Station> ListStationBySubcenterId(List<int> subcenterIds)
         {
             List<Station> result = new List<Station>();
             foreach(int subcenterId in subcenterIds)
@@ -16,6 +16,13 @@ namespace CJSW_WebMVC.DAL
                 result.InsertRange(0,current);
             }
             return result;
+        }
+
+        public static List<Station> ListStationAll()
+        {
+            IQueryable<SubCenter> subcenters = SubCenterHandler.ListCenter();
+            List<int> subcenterIds =(from subcenter in subcenters select subcenter.SubCenterID).ToList();
+            return ListStationBySubcenterId(subcenterIds);
         }
     }
 }

@@ -29,7 +29,7 @@
                     <label>分类:</label>
                     @{
                         List<SelectListItem> subcenterList = new List<SelectListItem> { new SelectListItem { Text = "所有站", Value = "0", Selected = true } };
-                        var subcenters = CJSW_WebMVC.DAL.SubCenterHandler.allCenter();
+                        var subcenters = CJSW_WebMVC.DAL.SubCenterHandler.ListCenter();
                         foreach (var subcenter in subcenters)
                         {
                             subcenterList.Add(new SelectListItem { Text = subcenter.SubCenterName, Value = ""+subcenter.SubCenterID });

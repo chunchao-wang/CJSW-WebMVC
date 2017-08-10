@@ -39,16 +39,7 @@ namespace CJSW_WebMVC.DAL
         public static List<string> ListStationIdBySubcenterId(int? SubCenterID)
         {
             //查询
-            IQueryable<Models.hydlstation> queryResult = null;
-            if (SubCenterID.HasValue)
-            {
-                queryResult = DBContext.db.hydlstation.Where(s => s.SubCenterID == SubCenterID.Value);
-
-            }
-            else
-            {
-                queryResult = DBContext.db.hydlstation;
-            }
+            IQueryable<Models.hydlstation> queryResult = SubCenterID.HasValue ? DBContext.db.hydlstation.Where(s => s.SubCenterID == SubCenterID.Value) : DBContext.db.hydlstation;
             //将查询结果填充进List返回
             List<string> stationIds = new List<string>();
             stationIds = (from station in queryResult select station.StationID).ToList();
@@ -59,9 +50,9 @@ namespace CJSW_WebMVC.DAL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static Models.Station getStationById(string id)
+        public static Models.Station GetStationById(string id)
         {
-            return new Models.Station(DBContext.db.hydlstation.Where(s => s.StationID == id).First());
+            return new Models.Station(DBContext.db.hydlstation.First(s => s.StationID == id));
         }
     }
 }

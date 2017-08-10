@@ -16,7 +16,7 @@ namespace CJSW_WebMVC.Models
             }
             else
             {
-                data = -1;//数据库缺数
+                this.data = -1;//数据库缺数
             }
         }
         public DateTime time { get; set; }

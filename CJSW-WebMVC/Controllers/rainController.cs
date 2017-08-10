@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CJSW_WebMVC.Models;
 
 namespace CJSW_WebMVC.Controllers
 {
@@ -25,77 +26,12 @@ namespace CJSW_WebMVC.Controllers
         //TODO 实时降雨的查询
         public ActionResult RealTime()
         {
-            ////DateTime from = Convert.ToDateTime(Request.Params.Get("from"));
-            ////DateTime to = Convert.ToDateTime(Request.Params.Get("to"));
-            ////string stationId = Request.Params.Get("station-id");
-            ////var list = new List<KeyValuePair<string, IQueryable<Models.rain>>>();
-            ////list.Add(new KeyValuePair<string, IQueryable<Models.rain>>("data", DAL.RainHandler.singleRainRecord(from, to, stationId)));
-            ////ViewData.Add("data",list);
-            ////ViewBag.Title = "实时降雨信息";
-            ////return View();
-
-            ///*显示所有站点的今日降雨*/
-            //#region 初始化查询条件
-            //DateTime today = DateTime.Now;
-            ////还不到8点，今日按照从昨天早上8点开始计算
-            //if (today.Hour <= 8)
-            //{
-            //    today = today.AddDays(-1);
-            //}
-            //DateTime from = new DateTime(
-            //    year: today.Year,
-            //    month: today.Month,
-            //    day: today.Day,
-            //    hour: 8,
-            //    minute: 0,
-            //    second: 0
-            //);
-            //DateTime to = new DateTime(
-            //    year: today.Year,
-            //    month: today.Month,
-            //    day: today.Day+1,
-            //    hour: DateTime.Now.Hour,
-            //    minute: 0,
-            //    second: 0
-            //);
-            //int? subcenterId = null;
-            //List<Models.Station> stations = DAL.StationHandler.listStation(subcenterId);
-            //#endregion
-            ////初始化查询结果
-            //Models.QueryResult result = new Models.QueryResult();
-
-            ////为查询结果添加表头
-            //result.dataTitles.Add("站号");
-            //result.dataTitles.Add("站名");
-            //result.dataTitles.Add("站类");
-            //result.dataTitles.Add("所在地");
-            //result.dataTitles.Add("累计");
-            //DateTime current = DateTime.Now;
-            //List<DateTime> period = new List<DateTime>();
-            //while (from < current)
-            //{
-            //    period.Add(current);
-            //    result.dataTitles.Add((current.AddHours(-1).Hour) + "-" + current.Hour);
-            //    current = current.AddHours(-1);
-            //}
-            //foreach (Models.Station station in stations)
-            //{
-            //    IQueryable<Models.rain> queryResult = DAL.RainHandler.singleRainRecord(from, to, station.stationId);
-            //    //添加累计和
-            //    Models.Record record = new Models.Record();
-            //    decimal sum = queryResult.Where(r => r.datatime <= period.FirstOrDefault() && r.datatime >= period.Last()).Sum(r => r.periodrain).Value;
-            //    record.station = station;
-            //    record.datas.Add(sum);
-            //    //每个时间段都分别求出结果
-            //    foreach(DateTime time in period)
-            //    {
-            //        decimal data = queryResult.Where(r => r.datatime < time.AddHours(1) && r.datatime >= time).Sum(r => r.periodrain).Value;
-            //        record.datas.Add(data);
-            //    }
-            //    result.records.Add(record);
-            //    ViewData.Add("table",result);
-
-            //}
+            //List<Station> stations = DAL.StationService.ListStationAll();
+            List<int> subcenter = new List<int>();
+            subcenter.Add(2);
+            List<Station> stations = DAL.StationService.ListStationBySubcenterId(subcenter);
+            List<string> stationIds = (from station in stations select station.stationId).ToList();
+            ViewData["realTimeRain"] = DAL.RainService.GetTodayRain(stationIds);
             return View();
         }
     public ActionResult RainReport()

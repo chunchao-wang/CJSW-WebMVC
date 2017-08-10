@@ -16,7 +16,7 @@ namespace CJSW_WebMVC
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "rain", action = "monitor", id = UrlParameter.Optional }
+                defaults: new { controller = "login", action = "", id = UrlParameter.Optional }
             );
         }
     }

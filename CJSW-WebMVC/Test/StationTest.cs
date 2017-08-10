@@ -11,11 +11,22 @@ namespace CJSW_WebMVC.Test
     public class StationTest
     {
         [TestMethod]
-        public void listStationTest()
+        public void ListStationTest()
         {
-            List<int> subcenters = new List<int>();
-            subcenters.Add(11);
-            List<Station> stations = StationService.listStationBySubcenterId(subcenters);
+            List<int> subcenters = new List<int> {11};
+            List<Station> stations = StationService.ListStationBySubcenterId(subcenters);
+            Console.ReadKey();
+        }
+
+        [TestMethod]
+        public void ListStationAllTest()
+        {
+            List<Station> stations = StationService.ListStationAll();
+            foreach (Station station in stations)
+            {
+                Console.WriteLine(station.stationId);
+            }
+            Console.WriteLine("共" + stations.Count + "行");
             Console.ReadKey();
         }
     }

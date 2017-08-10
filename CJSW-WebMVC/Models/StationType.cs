@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -12,4 +13,6 @@ namespace CJSW_WebMVC.Models
         waterStation=1,
         hydroStation=2
     }
+
+
 }
